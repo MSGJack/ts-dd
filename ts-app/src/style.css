@@ -1,0 +1,294 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #000000;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#main-container {
+  display: grid;
+  box-sizing: border-box;
+  grid-template-columns:
+    [outer-start] 10px
+    [mid-start] 10px
+    [inner-start] 6px
+    [gap-start] 1fr
+    [gap-end] 6px
+    [inner-end] 10px
+    [mid-end] 10px
+    [outer-end];
+  grid-template-rows:
+    [outer-start] 10px
+    [mid-start] 10px
+    [inner-start] 6px
+    [gap-start] 1fr
+    [gap-end] 6px
+    [inner-end] 10px
+    [mid-end] 10px
+    [outer-end];
+}
+
+.main-content {
+  grid-area: inner;
+  background-color: black;
+  padding: 5px;
+}
+
+.content-top-left {
+  grid-column: outer-start / inner-start;
+  grid-row: outer-start / inner-start;
+  border: 1px solid lightcoral;
+  transform: rotate(45deg);
+  animation: rotateCounterClockwise 5s linear infinite;
+}
+
+.content-bottom-left {
+  grid-column: outer-start / inner-start;
+  grid-row: inner-end / outer-end;
+  transform: rotate(45deg);
+  border: 1px solid lightcoral;
+  animation: rotateCounterClockwise 5s linear infinite;
+}
+
+.content-top-right {
+  grid-column: inner-end / outer-end;
+  grid-row: outer-start / inner-start;
+  transform: rotate(45deg);
+  border: 1px solid lightcoral;
+  animation: rotateClockwise 5s linear infinite;
+}
+
+.content-bottom-right {
+  grid-column: inner-end / outer-end;
+  grid-row: inner-end / outer-end;
+  transform: rotate(45deg);
+  border: 1px solid lightcoral;
+  animation: rotateClockwise 5s linear infinite;
+}
+
+.content-outer-layer {
+  grid-column: gap-start / gap-end;
+  grid-row: outer-start / outer-end;
+  border-top: 1px solid rgb(248, 122, 206);
+  border-bottom: 1px solid rgb(255, 127, 244);
+}
+
+.content-inner-layer {
+  grid-column: gap-start / gap-end;
+  grid-row: inner-start / inner-end;
+  border-top: 1px solid #fcfffe;
+  border-bottom: 1px solid rgb(242, 255, 251);
+}
+
+.content-wide-outer {
+  grid-column: outer-start / outer-end;
+  grid-row: gap-start / gap-end;
+  border-left: 1px solid darkred;
+  border-right: 1px solid darkred;
+}
+
+.content-wide-inner {
+  grid-column: inner-start / inner-end;
+  grid-row: gap-start / gap-end;
+  border-left: 1px solid rgb(50, 205, 252);
+  border-right: 1px solid rgb(78, 214, 255);
+}
+
+body {
+  background-color: #000;
+  text-align: center;
+  color: #cfcfcf;
+  max-width: 100vw;
+  height: auto;
+  overflow: auto;
+}
+
+h1 {
+  font-size: 2.2em;
+  font-family: "Tapestry", serif;
+  font-weight: 400;
+  color: #ddd;
+  font-style: normal;
+  text-decoration: underline;
+}
+
+#letterInput {
+  z-index: 1000;
+  position: relative;
+  border: 0.02rem solid #f8f8f8ee;
+  background-color: black;
+  color: aliceblue;
+  border-radius: 0.01rem;
+  height: 2rem;
+  font-weight: bold;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  z-index: 100;
+  position: relative;
+}
+button:hover {
+  outline: #ececec solid 1px;
+  cursor: pointer;
+  background-color: #f74949;
+}
+
+#buttonList {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.word-card {
+  border: 1px solid #ddd;
+  background-color: #000000;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 35px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+}
+
+.word-card p {
+  font-size: 1em;
+  color: #000000;
+  font-weight: bolder;
+}
+
+.cardShape {
+  position: relative;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  width: 20rem;
+  height: 30rem;
+}
+
+.cardShape.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.card-front {
+  background-color: #000000;
+  color: white;
+  box-shadow: inset 0 0.5rem 4rem 1rem #d80101, 0 0 1rem 0.5rem,
+    0 0 1rem 15px rgb(192, 0, 0);
+  /*
+    box-shadow: inset 0 0.5rem 2rem 1rem #d80101, 0 0 0 0.5rem,
+    0 0 1rem 7px rgb(192, 0, 0);*/
+  /* keeping this cause it gives a nice neon look*/
+  /*
+  box-shadow: 0 0.5rem 2rem 1rem #0133d8, 0 0 50px 0.5rem,
+    inset 0 0.1rem 3rem 0.1rem #21ccf7, 0 0 0 5px;*/
+}
+
+.card-back {
+  background-color: #f9f9f9;
+  color: black;
+  transform: rotateY(180deg);
+  overflow-y: auto;
+  /* box-shadow: 0 0 0 2px #000, 0 0 0 6px #00f, 0 0 0 10px #f00;*/
+  box-shadow: 0 1rem 4rem 1rem #000, 0 0 0 5px, 0 0 1rem 10px rgb(255, 17, 0);
+  display: flex;
+  flex-direction: column;
+}
+
+.cardShape.flipped {
+  transform: rotateY(180deg);
+}
+
+.inner-outline {
+  border: 2px solid #2d2d2d;
+  border-radius: 1.5rem;
+  padding: 0.3rem;
+  cursor: pointer;
+  /*box-shadow: inset 0 1rem 1rem blueviolet   */
+  box-shadow: inset 0 1rem 1rem #550909;
+}
+
+.inner-outline:hover {
+  /*box-shadow: inset 0 1rem 1rem rgb(164, 82, 241);  */
+  box-shadow: inset 0 1rem 1rem rgba(255, 41, 41, 0.73);
+}
+
+#wordList {
+  position: relative;
+  z-index: 99;
+  margin: 5px;
+}
+
+.cardList {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  border: 1px solid aliceblue;
+  border-radius: 35px;
+}
+
+p {
+  font-size: larger;
+}
+
+@keyframes rotateCounterClockwise {
+  from {
+    transform: rotate(45deg);
+  }
+  to {
+    transform: rotate(-315deg);
+  }
+}
+
+@keyframes rotateClockwise {
+  from {
+    transform: rotate(45deg);
+  }
+  to {
+    transform: rotate(405deg);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #buttonList {
+    flex-direction: column;
+  }
+}
+
